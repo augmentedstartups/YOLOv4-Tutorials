@@ -1,5 +1,7 @@
 # 1. YOLOv4 Prerequisites Installation Documentation
 
+Watch the Full Video Tutorial Here: https://youtu.be/5pYh1rFnNZs
+
 ## Step 1
 -	Cloned repository from official Github of Alexyab https://github.com/AlexeyAB/darknet
 ## Step 2
