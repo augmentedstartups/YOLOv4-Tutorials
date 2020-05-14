@@ -1,4 +1,4 @@
-# 1. YOLOv4 Prerequisites Installation Documentation
+# 1. Darknet and YOLOV4 Installation Documentation
 
 ## Step 1
 -	Cloned repository from official Github of Alexyab [link]
