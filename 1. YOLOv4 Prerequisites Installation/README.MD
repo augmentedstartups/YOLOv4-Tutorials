@@ -1,7 +1,7 @@
 # 1. YOLOv4 Prerequisites Installation Documentation
 
 ## Step 1
--	Cloned repository from official Github of Alexyab [link]
+-	Cloned repository from official Github of Alexyab https://github.com/AlexeyAB/darknet
 ## Step 2
 -	Copied OpenCV ffmpeg and world dlls for 4.1.0 version(can be used for OpenCV video processing) near to darknet.exe
 ## Step 3
@@ -11,7 +11,7 @@
 -	I’m using 10.2 so made change in two files
 1)	darknet.vcxproj [Line:55]
 2)	yolo_cpp_dll.vcxproj [Line:309]
--	Make it save
+-	Make sure to save it.
 ## Step 5
 Compile yolo_cpp_dll.vcxproj with updated Cuda version
 -	Open yolo_cpp_dll.vcxproj with VS
@@ -47,6 +47,7 @@ Should be imported otherwise right click on darknet and select clean the build a
 ## Step 7 Run Detection on Images
 
 `darknet.exe detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights`
+
 It’ll ask for the input path of the image
 
 ## Step 8 Run Detection on Videos
