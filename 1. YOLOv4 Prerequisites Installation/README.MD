@@ -46,11 +46,11 @@ Should be imported otherwise right click on darknet and select clean the build a
 
 ## Step 7 Run Detection on Images
 
-'darknet.exe detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights'
+`darknet.exe detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights`
 It’ll ask for the input path of the image
 
 ## Step 8 Run Detection on Videos
 
-darknet.exe detector demo cfg/coco.data cfg/yolov4.cfg yolov4.weights PATH_TO_THE_VIDEO
+`darknet.exe detector demo cfg/coco.data cfg/yolov4.cfg yolov4.weights test.mp4`
 
 
