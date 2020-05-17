@@ -1,7 +1,7 @@
 # 1. Darknet and YOLOV4 Installation Documentation
 
 ## Step 1
--	Cloned repository from official Github of Alexyab [link]
+-	Cloned repository from official Github of Alexyab https://github.com/AlexeyAB/darknet
 ## Step 2
 -	Copied OpenCV ffmpeg and world dlls for 4.1.0 version(can be used for OpenCV video processing) near to darknet.exe
 ## Step 3
