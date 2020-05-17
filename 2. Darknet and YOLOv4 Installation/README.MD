@@ -11,7 +11,7 @@
 -	I’m using 10.2 so made change in two files
 1)	darknet.vcxproj [Line:55]
 2)	yolo_cpp_dll.vcxproj [Line:309]
--	Make it save
+-	Save it.
 ## Step 5
 Compile yolo_cpp_dll.vcxproj with updated Cuda version
 -	Open yolo_cpp_dll.vcxproj with VS
