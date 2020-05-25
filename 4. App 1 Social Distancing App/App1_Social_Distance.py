@@ -111,8 +111,8 @@ def cvDrawBoxes(detections, img):
         for check in range(0, len(red_line_list)-1):					# Draw line between nearby bboxes iterate through redlist items
             start_point = red_line_list[check] 
             end_point = red_line_list[check+1]
-            check_line_x = abs(end_point[0] - start_point[0])   		# Calcualte the line coordinates for x  
-            check_line_y = abs(end_point[1] - start_point[1])			# Calcualte the line coordinates for y
+            check_line_x = abs(end_point[0] - start_point[0])   		# Calculate the line coordinates for x  
+            check_line_y = abs(end_point[1] - start_point[1])			# Calculate the line coordinates for y
             if (check_line_x < 75) and (check_line_y < 25):				# If both are We check that the lines are below our threshold distance.
                 cv2.line(img, start_point, end_point, (255, 0, 0), 2)   # Only above the treshold lines are displayed. 
         #=================================================================#
