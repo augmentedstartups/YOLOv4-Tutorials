@@ -1,10 +1,7 @@
-#================================================================
-#  To learn how to Develop Advance YOLOv4 Apps - Then check out:
-#  https://augmentedstartups.info/yolov4release
-#================================================================ 
 from __future__ import division, print_function, absolute_import
 
 from timeit import time
+import os
 import warnings
 import cv2
 import numpy as np
@@ -32,15 +29,18 @@ def main(yolo):
     # Deep SORT
     model_filename = 'model_data/mars-small128.pb'
     encoder = gdet.create_box_encoder(model_filename, batch_size=1)
-    
+    # Calculate cosine Distance Metric 
     metric = nn_matching.NearestNeighborDistanceMetric("cosine", max_cosine_distance, nn_budget)
     tracker = Tracker(metric)
 
-    tracking = True
-    writeVideo_flag = True
-    asyncVideo_flag = False
+    # Flags for process
+    tracking = True # Set False if you only want to detction
+    writeVideo_flag = True # Set False if you don't want to write frames locally
+    asyncVideo_flag = False # It uses asynchronous processing for better FPS :Warning: Shuttering Problem
 
+    # Video File Path
     file_path = './Input/test1.mp4'
+    # Check if asyncVideo flag set to True
     if asyncVideo_flag :
         video_capture = VideoCaptureAsync(file_path)
     else:
@@ -58,7 +58,7 @@ def main(yolo):
             h = int(video_capture.get(4))
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
         output_file = os.path.basename(file_path)[:-4]
-        out = cv2.VideoWriter('./Output/' + output_file + "_output.mp4", fourcc, 30, (w, h))
+        out = cv2.VideoWriter('./Demos/Output/' + output_file + "_output.mp4", fourcc, 30, (w, h))
         frame_index = -1
 
     fps = 0.0
@@ -66,21 +66,25 @@ def main(yolo):
 
 
     while True:
-        ret, frame = video_capture.read()
+        ret, frame = video_capture.read() # Capture frames
         if ret != True:
              break
 
         t1 = time.time()
-
-        image = Image.fromarray(frame[...,::-1])  # Convert from bgr to rgb
-        boxes, confidence, classes = yolo.detect_image(image)
+        
+        # bgr to rgb frame conversion
+        image = Image.fromarray(frame[...,::-1])  
+        # YOLOv4 Detection
+        boxes, confidence, classes = yolo.detect_image(image) 
 
         if tracking:
+            # Encodes the frame and boxes for DeepSORT
             features = encoder(frame, boxes)
-
+            # DeepSORT Detection
             detections = [Detection(bbox, confidence, cls, feature) for bbox, confidence, cls, feature in
                           zip(boxes, confidence, classes, features)]
         else:
+            # Only YOLOv4 Detection
             detections = [Detection_YOLO(bbox, confidence, cls) for bbox, confidence, cls in
                           zip(boxes, confidence, classes)]
 
@@ -99,7 +103,10 @@ def main(yolo):
                 if not track.is_confirmed() or track.time_since_update > 1:
                     continue
                 bbox = track.to_tlbr()
+                # Draw white bbox for DeepSORT
                 cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (255, 255, 255), 2)
+                cv2.putText(frame, "ID: " + str(track.track_id), (int(bbox[0]), int(bbox[1])), 0,
+                            1.5e-3 * frame.shape[0], (0, 255, 0), 1)
 
         for det in detections:
             bbox = det.to_tlbr()
@@ -109,11 +116,12 @@ def main(yolo):
                 cls = det.cls
                 center_bbox = (int(bbox[2]), int(bbox[2]))
                 if str(cls) == 'car':
-                	cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (255, 0, 0), 2)
+                    # Draw Blue bbox for YOLOv4 car detection
+                    cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (255, 0, 0), 2)
                 elif str(cls) == 'motorbike':
-                	cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (72, 35, 13), 2)
-                cv2.putText(frame, str(cls), (int(bbox[0]), int(bbox[3])), 0,
-                            1.5e-3 * frame.shape[0], (0, 255, 0), 1)
+                    # Draw Orange bbox for YOLOv4 Motorbike detection
+                    cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (0, 140, 255), 2)
+
 
         cv2.imshow('', frame)
 

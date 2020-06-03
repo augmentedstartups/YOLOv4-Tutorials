@@ -5,7 +5,6 @@ numpy
 pillow
 scikit-learn
 scipy
-sklearn 0.0
 tensorboard
 tensorflow
 tensorflow-estimator
