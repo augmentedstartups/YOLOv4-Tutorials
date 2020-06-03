@@ -1,3 +1,7 @@
+#================================================================
+#  To learn how to Develop Advance YOLOv4 Apps - Then check out:
+#  https://augmentedstartups.info/yolov4release
+#================================================================ 
 from __future__ import division, print_function, absolute_import
 
 from timeit import time
@@ -36,7 +40,7 @@ def main(yolo):
     writeVideo_flag = True
     asyncVideo_flag = False
 
-    file_path = './Demos/Input/roadview.mp4'
+    file_path = './Input/test1.mp4'
     if asyncVideo_flag :
         video_capture = VideoCaptureAsync(file_path)
     else:
@@ -54,7 +58,7 @@ def main(yolo):
             h = int(video_capture.get(4))
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
         output_file = os.path.basename(file_path)[:-4]
-        out = cv2.VideoWriter('./Demos/Output/' + output_file + "_output.mp4", fourcc, 30, (w, h))
+        out = cv2.VideoWriter('./Output/' + output_file + "_output.mp4", fourcc, 30, (w, h))
         frame_index = -1
 
     fps = 0.0
@@ -68,7 +72,7 @@ def main(yolo):
 
         t1 = time.time()
 
-        image = Image.fromarray(frame[...,::-1])  # bgr to rgb
+        image = Image.fromarray(frame[...,::-1])  # Convert from bgr to rgb
         boxes, confidence, classes = yolo.detect_image(image)
 
         if tracking:

@@ -1,3 +1,7 @@
+#================================================================
+#  To learn how to Develop Advance YOLOv4 Apps - Then check out:
+#  https://augmentedstartups.info/yolov4release
+#================================================================ 
 import os
 import colorsys
 
