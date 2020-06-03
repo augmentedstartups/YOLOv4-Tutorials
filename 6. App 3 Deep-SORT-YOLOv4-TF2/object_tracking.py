@@ -38,7 +38,7 @@ def main(yolo):
     tracker = Tracker(metric)
 
     # Flags for process
-    tracking = True # Set False if you only want to detction
+    tracking = True # Set False if you only want to do detection
     writeVideo_flag = True # Set False if you don't want to write frames locally
     asyncVideo_flag = False # It uses asynchronous processing for better FPS :Warning: Shuttering Problem
 
