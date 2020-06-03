@@ -1,3 +1,7 @@
+#================================================================
+#  To learn how to Develop Advance YOLOv4 Apps - Then check out:
+#  https://augmentedstartups.info/yolov4release
+#================================================================ 
 from __future__ import division, print_function, absolute_import
 
 from timeit import time
@@ -58,7 +62,7 @@ def main(yolo):
             h = int(video_capture.get(4))
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
         output_file = os.path.basename(file_path)[:-4]
-        out = cv2.VideoWriter('./Demos/Output/' + output_file + "_output.mp4", fourcc, 30, (w, h))
+        out = cv2.VideoWriter('./Output/' + output_file + "_output.mp4", fourcc, 30, (w, h))
         frame_index = -1
 
     fps = 0.0
