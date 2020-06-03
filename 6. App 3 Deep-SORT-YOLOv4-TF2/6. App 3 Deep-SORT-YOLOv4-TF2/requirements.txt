@@ -1,0 +1,11 @@
+imutils
+keras
+matplotlib
+numpy
+pillow
+scikit-learn
+scipy
+tensorboard
+tensorflow
+tensorflow-estimator
+tensorflow-gpu
